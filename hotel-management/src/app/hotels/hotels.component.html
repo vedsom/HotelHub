@@ -1,0 +1,103 @@
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <div class="container d-flex align-items-center">
+    <a class="navbar-brand mb-0" href="#">Hotel Management</a>
+    <div class="btn-group ms-2">
+      <button class="btn btn-light btn-sm" (click)="setTab('view')">View Hotels</button>
+      <button class="btn btn-light btn-sm ms-2" (click)="setTab('add')">Add Hotel</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+
+  <!-- View Hotels -->
+  <div *ngIf="selectedTab === 'view'">
+    <h2 class="text-center mb-4">Hotel Listings</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let hotel of hotels">
+        <div class="card shadow-lg hotel-card">
+          <img 
+            [src]="hotel.image || hotels[hotel.id!] || 'assets/hotels/default.jpg'" 
+            class="card-img-top" 
+            alt="{{hotel.name}}">
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ hotel.name }}</h5>
+            <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
+            <p class="card-text"><strong>Rating:</strong> {{ hotel.rating }} ⭐</p>
+          </div>
+          
+          <div class="card-footer d-flex justify-content-between">
+            <button class="btn btn-warning btn-sm" (click)="startEdit(hotel)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteHotel(hotel.id!)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Hotel Form -->
+  <div *ngIf="selectedTab === 'add'" class="mt-4">
+    <h3>Add New Hotel</h3>
+    <form (ngSubmit)="addHotel()">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="newHotel.name" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" [(ngModel)]="newHotel.location" name="location" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Rating</label>
+        <input type="number" class="form-control" [(ngModel)]="newHotel.rating" name="rating" min="1" max="5" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="text" class="form-control" [(ngModel)]="newHotel.image" name="image">
+      </div>
+
+      <button type="submit" class="btn btn-success">Add Hotel</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="setTab('view')">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Edit Hotel Form -->
+  <div *ngIf="selectedTab === 'edit'" class="mt-4">
+    <h3>Edit Hotel</h3>
+    <form (ngSubmit)="updateHotel()">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="editHotelData!.name" name="editName" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" [(ngModel)]="editHotelData!.location" name="editLocation" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Rating</label>
+        <input type="number" class="form-control" [(ngModel)]="editHotelData!.rating" name="editRating" min="1" max="5" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="text" class="form-control" [(ngModel)]="editHotelData!.image" name="editImage">
+      </div>
+
+      <button type="submit" class="btn btn-success">Update Hotel</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="setTab('view')">Cancel</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  &copy; 2025 Hotel Management System. All Rights Reserved.
+</footer>
