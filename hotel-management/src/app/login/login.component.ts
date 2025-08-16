@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +15,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onLogin() {
-  this.http.post<any>('http://localhost:5000/login', {
+  this.http.post<any>(`${environment.apiUrl}/login`, {
     username: this.username,
     password: this.password
   }).subscribe({
