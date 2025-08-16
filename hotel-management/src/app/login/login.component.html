@@ -1,17 +1,84 @@
-<div class="container mt-5" style="max-width:400px;">
-  <h2 class="text-center mb-4">Login</h2>
-  <form (ngSubmit)="onLogin()">
-    <div class="mb-3">
-      <label class="form-label">Username</label>
-      <input type="text" [(ngModel)]="username" name="username" class="form-control" required>
-    </div>
+<div class="login-container">
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <div class="login-card">
+          <div class="row g-0 h-100">
+            <!-- Form Section -->
+            <div class="col-md-6">
+              <div class="form-section">
+                <div class="text-center mb-4">
+                  <h2 class="login-title">Welcome Back</h2>
+                  <p class="login-subtitle">Sign in to your account</p>
+                </div>
 
-    <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" [(ngModel)]="password" name="password" class="form-control" required>
-    </div>
+                <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+                  <!-- Username Field -->
+                  <div class="mb-4">
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-user"></i>
+                      </span>
+                      <div class="form-floating input-with-icon">
+                        <input 
+                          type="text" 
+                          [(ngModel)]="username" 
+                          name="username" 
+                          class="form-control" 
+                          id="username"
+                          placeholder="Username"
+                          required>
+                        <label for="username">Username</label>
+                      </div>
+                    </div>
+                  </div>
 
-    <button type="submit" class="btn btn-primary w-100">Login</button>
-    <p class="text-danger mt-2" *ngIf="errorMessage">{{ errorMessage }}</p>
-  </form>
+                  <!-- Password Field -->
+                  <div class="mb-4">
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                      <div class="form-floating input-with-icon">
+                        <input 
+                          type="password" 
+                          [(ngModel)]="password" 
+                          name="password" 
+                          class="form-control" 
+                          id="password"
+                          placeholder="Password"
+                          required>
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Login Button -->
+                  <button type="submit" class="btn btn-login w-100 mb-3">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Login
+                  </button>
+
+                  <!-- Error Message -->
+                  <div class="alert error-message" *ngIf="errorMessage">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    {{ errorMessage }}
+                  </div>
+                </form>
+
+    
+              </div>
+            </div>
+
+            <!-- Image Section -->
+            <div class="col-md-6">
+              <div class="image-section">
+                <img src="../../assets/hotel-sign-in.png" alt="" class="login-image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
