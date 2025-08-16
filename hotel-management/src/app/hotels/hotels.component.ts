@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HotelService, Hotel } from '../services/hotel.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class HotelsComponent implements OnInit {
   newHotel: Hotel = { name: '', location: '', rating: 0, image: '' };
   editHotelData: Hotel | null = null;
 
-  constructor(private hotelService: HotelService) {}
+  constructor(private hotelService: HotelService, private router: Router) {}
 
   ngOnInit() {
     this.loadHotels();
@@ -69,5 +70,10 @@ export class HotelsComponent implements OnInit {
       alert('Hotel deleted');
       this.setTab('view');
     });
+  }
+
+  logout() {
+    localStorage.removeItem('isLoggedIn'); // Clear login status
+    this.router.navigate(['/login']);      // Redirect to login page
   }
 }
