@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: hotel-management-backend:latest
+        image: abhi9701/hotel-management-backend:latest
         ports:
         - containerPort: 5000
 ---
